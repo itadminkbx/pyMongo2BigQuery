@@ -1,0 +1,14 @@
+*.txt
+*.json
+env/*
+*.csv
+__pycache__/*
+.*.*swp
+keys/*
+dbCreds/*
+creds/*
+*.xls
+*.xlsx
+.~lock*
+.env
+*.sh
