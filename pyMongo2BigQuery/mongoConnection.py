@@ -39,12 +39,6 @@ class mongoConnection:
             file_name = os.environ['DB_CREDS']
             with open(file_name, 'r') as f:
                 self.DB_CREDS = json.loads(f.read())
-            with open('customer_ignore.json', 'r') as c:
-                self.customer_ignore = json.loads(c.read())
-            with open('doctor_ignore.json', 'r') as d:
-                self.doctor_ignore = json.loads(d.read())
-            self.nowrite_flag = os.getenv('NO_UPDATE_INSERT') == 'YES'
-            self.reports_directory = os.getenv('EXPORT_PATH')
             self.connection_string = 'mongodb+srv://{username}:{password}@{url}/{database}?{permissions}'.format(**self.DB_CREDS)
             self.connected = False
             self.client = None
@@ -200,10 +194,6 @@ class mongoConnection:
     def insertRecord(self, _table_name, _record):
         '''
         '''
-        if self.nowrite_flag:
-            print('Not connected to DB')
-            return
-        print(f'inserting....{_table_name}{os.linesep}')
         self.connectToDb()
         collection = self.db.get_collection(_table_name)
         try:
@@ -217,9 +207,6 @@ class mongoConnection:
     def insertRecords(self, _table_name, _records):
         '''
         '''
-        if self.nowrite_flag:
-            print('Not connected to DB')
-            return
         if _records == []:
             print('empty insert')
             return
@@ -238,9 +225,6 @@ class mongoConnection:
         '''
         if _filter == None:
             _filter = {}
-        if self.nowrite_flag:
-            print('Not connected to DB')
-            return
         print(f'updating....{_table_name}{os.linesep}')
         self.connectToDb()
         try:
@@ -256,9 +240,6 @@ class mongoConnection:
         '''
         if _filter == None:
             _filter = {}
-        if self.nowrite_flag:
-            print('Not connected to DB')
-            return
         print(f'updating....{_table_name}{os.linesep}')
         self.connectToDb()
         try:
@@ -271,9 +252,6 @@ class mongoConnection:
     def dropTable(self, _table_name):
         '''
         '''
-        if self.nowrite_flag:
-            print('Not connected to DB')
-            return
         print(f'dropping table....{_table_name}{os.linesep}')
         self.connectToDb()
         try:
@@ -289,9 +267,6 @@ class mongoConnection:
         '''
         if _filter == None:
             _filter = {}
-        if self.nowrite_flag:
-            print('Not connected to DB')
-            return
         print(f'delete records....{_table_name}{os.linesep}')
         self.connectToDb()
         try:
@@ -307,9 +282,6 @@ class mongoConnection:
         '''
         if _filter == None:
             _filter = {}
-        if self.nowrite_flag:
-            print('Not connected to DB')
-            return
         print(f'delete single record....{_table_name}{os.linesep}')
         self.connectToDb()
         try:
