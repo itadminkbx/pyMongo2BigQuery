@@ -1,4 +1,4 @@
-[build system]
+[build-system]
 requires = [
 	"setuptools>=54",
 	"wheel"
@@ -6,3 +6,6 @@ requires = [
 
 
 build-backend = "setuptools.build_meta"
+
+
+
