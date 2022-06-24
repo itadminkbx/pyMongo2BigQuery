@@ -283,15 +283,7 @@ class bigQuery:
 if __name__ == '__main__':
     print('works')
     bq =bigQuery()
-    _table_name = 'InsertLogs'
-    _rows = []
-    _row = {'Table_Name': 'AppointmentDump',
-            'Query_Time': str(datetime.utcnow()),
-            'Query_Date_Filter': str(date.today()),
-            'Number_Of_Rows': 100}
-    _rows.append(_row)
-    #status= bq.insertRows(_table_name, _rows)
-    #print(status, '\n', type(status))
+    #WRITE YOUR TEST CODE HERE
     bq.disconnectBq()
     bq.disconnectGs()
     print(getLocalTime())
