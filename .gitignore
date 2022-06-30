@@ -12,3 +12,6 @@ creds/*
 .~lock*
 .env
 *.sh
+dist/*
+pyMongo2BigQuery.egg-info/*
+pylintrc

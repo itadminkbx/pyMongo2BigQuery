@@ -174,7 +174,7 @@ class mongoConnection:
             _filter = {}
         _fileName = f'{_table_name}.json'
         if _timestamp_flag:
-            _fileName = f'{table_name}-{datetime.now().strptime("%Y-%m-%d_%H%M%S")}.json'
+            _fileName = f'{_table_name}-{datetime.now().strptime("%Y-%m-%d_%H%M%S")}.json'
         try:
             return loadJsonFile(_fileName)
         except FileNotFoundError as fex: 
@@ -201,7 +201,7 @@ class mongoConnection:
         except Exception as ex:
             print(ex)
             self.disconnectDb()
-            raise Exception(ex.message)
+            raise Exception(ex)
 
 
     def insertRecords(self, _table_name, _records):
@@ -218,7 +218,7 @@ class mongoConnection:
         except Exception as ex:
             print(ex)
             self.disconnectDb()
-            raise Exception(ex.message)
+            raise Exception(ex)
 
     def updateTable(self, _table_name, _update, _filter= None):
         '''
@@ -297,11 +297,7 @@ class mongoConnection:
 if __name__ == '__main__':
     print('works')
     db = mongoConnection()
-    try:
-        print(db.customer_ignore)
-        print(db.doctor_ignore)
-    except Exception as ex:
-        print(ex)
+    #INSERT TEST CODE HERE
     db.disconnectDb()
 
 

@@ -1,6 +1,8 @@
+'''
+huh?
+'''
 #!env/bin/python
 
-import time
 import time
 import json
 from datetime import datetime, timedelta, date
@@ -23,14 +25,15 @@ def saveJsonFile(_file_name: str, _dict: Dict, _default: Type = str)-> None:
     '''
     with open(_file_name, 'w') as f:
         json.dump(_dict, f, default=str, indent=4)
-    return 
+    return
 
 def loadCsv(_fileName :str)-> dict:
     '''
     return list of dictonaries...
     '''
     _list = open(_fileName).readlines()
-    _splitList = [[f.strip().replace('"','') for f in e.split('|')] for e  in _list]
+    _splitList = [[f.strip().replace('"','') for f in e.split('|')] \
+            for e  in _list]
     return [ dict(zip(_splitList[0],e)) for e in _splitList[1:]]
 
 def saveCsv(_csv_data: List[List[str]], _fileName: str)-> None:
@@ -62,7 +65,10 @@ def getProperDate(_date_string : str, _date_format : str)-> date:
     return return_date
 
 
-def getLocalTime(_utc: Union[None, str, datetime]= None, _tmz: str = 'Asia/Yangon')-> datetime:
+def getLocalTime(
+    _utc: Union[None, str, datetime]= None, 
+    _tmz: str = 'Asia/Yangon'
+)-> datetime:
     '''
     '''
     if _utc == None:
@@ -72,7 +78,8 @@ def getLocalTime(_utc: Union[None, str, datetime]= None, _tmz: str = 'Asia/Yango
     elif isinstance(_utc, datetime):
         utc_time = _utc
     else:
-        raise Exception('Unsupported type {0}, getLocal(_utc), \n_utc needs to be of type str/datetime'.format(type(_utc)))
+        raise Exception('Unsupported type {0}, getLocal(_utc), \
+                \n_utc needs to be of type str/datetime'.format(type(_utc)))
     return pytz.utc.localize(utc_time).astimezone(pytz.timezone(_tmz))
 
 
@@ -85,7 +92,7 @@ def saveDictCsv(_dict: dict, _file_name: str)-> None:
     data = []
     for _id, row in _dict.items():
         keys = set(row.keys())
-        new_headers = keys -set(csv_header) 
+        new_headers = keys -set(csv_header)
         missing_headers = set(csv_header) - keys
         for e in sorted(new_headers):
             csv_header.append(e)

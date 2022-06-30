@@ -12,6 +12,10 @@
 # limitations under the License.
 #
 
+
+'''
+'''
+
 import os
 from io import StringIO
 import json
@@ -66,7 +70,7 @@ class bigQuery:
             print(ex)
             self.bq_connected = False
     
-    def disconnectBq(self):
+    def disconnectBq(self)-> None:
         '''
         '''
         try:
@@ -137,8 +141,8 @@ class bigQuery:
         if _parameters == None:
             job  = self.bq_client.query(_query)
         else:
-            job_config = bigquery.QueryJobConfig(query_parameters=_parameters)
-            job_config =  Query
+            _job_config = bigquery.QueryJobConfig(query_parameters=_parameters)
+            job =  self.bq_client.query(query=_query, job_config= _job_config)
         rows = job.result()
         return rows
 
